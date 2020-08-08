@@ -1,0 +1,63 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<form action="/teachers" class="card" method="POST">
+    <section class="avatar" style="background: url({{teacher.avatar_url}}) no-repeat center center / cover"></section>
+    
+    <section class="details">
+        <h3>professor@</h3>
+
+        <div class="item">
+            <div>Avatar URL</div>
+            <div>{{teacher.avatar_url}}</div>
+        </div>
+
+        <div class="item">
+            <div>Nome do professor@</div>
+            <div>{{teacher.name}}</div>
+        </div>
+
+        <div class="item">
+            <div>Data de nascimento</div>
+            <div>{{teacher.birth}}</div>
+        </div>
+
+        <div class="item">
+            <div>Grau de escolaridade</div>
+            <div>{{teacher.level}}</div>
+        </div>
+
+        <div class="item">
+            <div>Tipo de aula</div>
+            <div>
+                <span>
+                    <input type="radio" name="service" value="presencial"
+                    {% if teacher.service == "presencial" %} checked
+                    {% endif %}>Presencial
+                </span>
+                <span>
+                    <input type="radio" name="service" value="distancia"
+                    {% if teacher.service == "distancia" %} checked
+                    {% endif %}>À distância
+                </span>
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Área de atuação</div>
+            <div>{{teacher.lecture}}</div>
+        </div>
+
+        <div class="item">
+            <div>Desde</div>
+            <div>{{teacher.created_at}}</div>
+        </div>
+
+        <a href="/teachers/{{teacher.id}}/edit" class="button">Editar</a>
+
+    </section>
+
+
+</form>
+
+{% endblock %}

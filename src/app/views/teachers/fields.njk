@@ -1,0 +1,100 @@
+<div class="item">
+<div>Avatar URL</div>
+    <div>
+        <input 
+        type="url"
+        name="avatar_url"
+        placeholder="http://"
+        value="{{teacher.avatar_url}}"
+        >
+    </div>
+</div>
+
+<div class="item">
+    <div>Nome do professor@</div>
+    <div>
+        <input 
+        type="text"
+        name="name"
+        placeholder="Digite o seu nome"
+        value="{{teacher.name}}"
+        >
+    </div>
+</div>
+
+<div class="item">
+    <div>Data de nascimento</div>
+    <div>
+        <input 
+        type="date"
+        name="birth"
+        placeholder="Insirar a data de nascimento"
+        value="{{teacher.birth}}"
+        >
+    </div>
+</div>
+
+<div class="item">
+    <div>Grau de escolaridade</div>
+    <div>
+        <select name="level" id="level-education">
+            <option value="ensino-medio" 
+            {% if teacher.level == "ensino-medio" %}
+                selected="selected"
+            {% endif %}>Ensino Médio Completo
+            </option>
+
+            <option value="ensino-superior"
+            {% if teacher.level == "ensino-superior" %}
+                selected="selected"
+            {% endif %}>Ensino Superio Completo
+            </option>
+
+            <option value="master"
+            {% if teacher.level == "master" %}
+                selected="selected"
+            {% endif %}>Mestrado
+            </option>
+            
+            <option value="phd"
+            {% if teacher.level == "phd" %}
+                selected="selected"
+            {% endif %}>Doutorado
+            </option>
+        </select>
+    </div>
+</div>
+
+<div class="item">
+    <div>Tipo de aula</div>
+    <div>
+        <span>
+            <input type="radio" name="service" value="presencial"
+            {% if teacher.service == "presencial" %} checked
+            {% endif %}>Presencial
+        </span>
+
+        <span>
+            <input type="radio" name="service" value="distancia"
+            {% if teacher.service == "distancia" %} checked
+            {% endif %}>À distância
+        </span>
+    </div>
+</div>
+
+
+<div class="item">
+    <div>Área de atuação</div>
+    <input 
+    type="text"
+    name="lecture"
+    placeholder="Separe as materias prestados por vírgula"
+    value="{{teacher.lecture}}"
+    >
+</div>
+
+<div class="btn">
+    <button id="btn-save" type="submit">Salvar</button>  
+
+    <button id="btn-delete" form="form-delete" type="submit">Deletar</button>
+</div>

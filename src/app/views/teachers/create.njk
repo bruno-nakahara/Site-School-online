@@ -1,0 +1,79 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<form action="/teachers" class="card" method="POST">
+    <section class="avatar" style="background: url(https://source.unsplash.com/collection/1602384/900x900) no-repeat center center / cover"></section>
+    
+    <section class="details">
+        <h3>Novo professor@</h3>
+
+        <div class="item">
+            <div>Avatar URL</div>
+            <div>
+                <input 
+                type="url"
+                name="avatar_url"
+                placeholder="http://"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Nome do professor@</div>
+            <div>
+                <input 
+                type="text"
+                name="name"
+                placeholder="Digite o seu nome"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Data de nascimento</div>
+            <div>
+                <input 
+                type="date"
+                name="birth"
+                placeholder="Insirar a data de nascimento"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Grau de escolaridade</div>
+            <div>
+                <select name="level" id="level-education">
+                    <option value="ensino-medio">Ensino Médio Completo</option>
+                    <option value="ensino-superior">Ensino Superio Completo</option>
+                    <option value="master">Mestrado</option>
+                    <option value="phd">Doutorado</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Tipo de aula</div>
+            <div>
+                <span><input type="radio" name="service" value="presencial">Presencial</span>
+                <span><input type="radio" name="service" value="distancia">À distância</span>
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Área de atuação</div>
+            <input 
+            type="text"
+            name="lecture"
+            placeholder="Separe as materias prestados por vírgula"
+            >
+        </div>
+
+        <button type="submit">Salvar</button>
+
+    </section>
+
+
+</form>
+
+{% endblock %}
