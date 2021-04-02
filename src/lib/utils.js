@@ -30,10 +30,14 @@ module.exports = {
         const year = date.getUTCFullYear()
         const month = `0${date.getUTCMonth() + 1}`.slice(-2)
         const day = `0${date.getUTCDate()}`.slice(-2)
+        const hour = date.getHours()
+        const minute = date.getMinutes()
+        const second = date.getSeconds()
         const birthDay = `${day}/${month}`
         const format = `${day}-${month}-${year}`
+        const created_at = `${month} ${day} ${year} ${hour}:${minute}:${second}`
 
-        return {day, month, year, iso:`${year}-${month}-${day}`, birthDay, format}
+        return {day, month, year, iso:`${year}-${month}-${day}`, birthDay, format, created_at}
 
     },
     grades(grade) {

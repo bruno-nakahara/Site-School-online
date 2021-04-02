@@ -280,3 +280,16 @@ td:last-child {
     margin: 0px;
 }
 
+/* === Pagination === */
+.table-container .pagination {
+    margin: 32px 0px 0px 0px;
+    text-align: center;
+}
+
+.pagination a {
+    margin-right: 16px;
+}
+
+.pagination a:hover {
+    filter: brightness(0.7);
+} 

@@ -4,29 +4,53 @@ const Student = require("../models/student")
 module.exports = {
     index(req, res) {
 
-        Student.all(function(students) {
-            return res.render('students/index', {students})
-        })
+        let {filter, page, limit} = req.query
+
+        page = page || 1
+        limit = limit || 2
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(students) {
+                let total = 0
+
+                if (students[0] == undefined) {
+                    total = 0
+                } else {
+                    total = Math.ceil(students[0].total / limit)
+                }
+                const pagination = {
+                    total,
+                    page
+                }
+
+                return res.render('students/index', {students, pagination, filter})
+            }
+        }
+
+        Student.paginate(params)
         
     },
     create(req, res) {
+        
         Student.teacherOption(function(options) {
             return res.render("students/create", {teacherOptions:options})
         })        
     },
-    post(req, res) {
-        const keys = Object.keys(req.body)
-
-        for (key of keys) {
-            if (req.body[key] == "") {
-                return res.send("Please, fill all the field")
-            }
+    async post(req, res) {
+        const studentData = {
+            ...req.body,
+            grade: grades(req.body.grade)
         }
 
-        Student.create(req.body, function(student) {
-            return res.redirect(`/students`)
-        })
-        
+        const studentId = await Student.create(studentData)
+
+        return res.redirect(`/students/${studentId}`)
+
     },
     show(req, res) {
         Student.find(req.params.id, function(student) {
@@ -48,23 +72,24 @@ module.exports = {
             })  
         })
     },
-    update(req, res) {
-        const keys = Object.keys(req.body)
+    async update(req, res) {
 
-        for (key of keys) {
-            if (req.body[key] == "") {
-                return res.send("Please, fill all the field")
-            }
+        const studentData = {
+            ...req.body,
+            grade: grades(req.body.grade)
         }
+        
+        await Student.update(req.body.id, studentData)
 
-        Student.update(req.body, function() {
-            return res.redirect(`/students/${req.body.id}`)
-        })
+        return res.redirect(`/students/${req.body.id}`)
+       
     },
-    delete(req, res) {
-        Student.delete(req.body.id, function() {
-            return res.redirect('/students')
-        })
+    async delete(req, res) {
+
+        await Student.delete(req.body.id)
+
+        return res.redirect('/students')
+        
     }
 }
 
