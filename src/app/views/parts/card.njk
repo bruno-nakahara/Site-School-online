@@ -1,0 +1,17 @@
+{% macro success(title) %}
+<div class="lottie-message">
+    <div class="success-lottie"></div>
+    <h3>{{title}}</h3>
+    {{ caller() }}
+</div>
+
+{% endmacro %}
+
+{% macro error(title) %}
+<div class="lottie-message">
+    <div class="error-lottie"></div>
+    <h3>{{title}}</h3>
+    {{ caller() }}
+</div>
+
+{% endmacro %}

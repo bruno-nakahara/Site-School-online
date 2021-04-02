@@ -49,7 +49,7 @@ module.exports = {
 
         const studentId = await Student.create(studentData)
 
-        return res.redirect(`/students/${studentId}`)
+        return res.render("parts/success" , { student: studentData })
 
     },
     show(req, res) {
@@ -73,23 +73,32 @@ module.exports = {
         })
     },
     async update(req, res) {
+        try {
+            const studentData = {
+                ...req.body,
+                grade: grades(req.body.grade)
+            }
+            
+            await Student.update(req.body.id, studentData)
+    
+            return res.render("parts/success" , { student: studentData })
 
-        const studentData = {
-            ...req.body,
-            grade: grades(req.body.grade)
-        }
-        
-        await Student.update(req.body.id, studentData)
-
-        return res.redirect(`/students/${req.body.id}`)
-       
+        } catch (err) {
+            console.error(err)
+            return res.render('parts/error')
+        }       
     },
     async delete(req, res) {
+        try {
+            await Student.delete(req.body.id)
 
-        await Student.delete(req.body.id)
+            const student = true
 
-        return res.redirect('/students')
-        
+            return res.render("parts/delete-success", { student })
+        } catch (err) {
+            console.error(err)
+            return res.render('parts/error')
+        }  
     }
 }
 

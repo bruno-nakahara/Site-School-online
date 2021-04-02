@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+@keyframes hidemessage {
+    to {
+        top: -50px;
+        opacity: 0;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -293,3 +300,53 @@ td:last-child {
 .pagination a:hover {
     filter: brightness(0.7);
 } 
+
+.messages {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    position: absolute;
+    width: 100%;
+    color: white;
+    top: 0;
+    animation: hidemessage 400ms 1s ease-out forwards;
+}
+
+.messages.error {
+    background: #e74c3c;
+    
+}
+
+.lottie-message {
+    width: 500px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+    border-radius: 4px;
+    box-shadow: 2px 2px 10px 2px rgb(255, 255, 255);
+}
+
+.lottie-message .success-lottie {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.lottie-message h3 {
+    margin: 0 auto;
+}
+
+.lottie-message a {
+    margin: 0 auto;
+    text-decoration: none;
+    color: royalblue;
+}
+
+.error-lottie {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    padding: 10px 0;
+}

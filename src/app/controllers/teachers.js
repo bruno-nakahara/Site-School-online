@@ -44,7 +44,7 @@ module.exports = {
         
         const teacherId = await Teacher.create(teacherData)
 
-        return res.redirect(`/teachers/${teacherId}`)
+        return res.render("parts/success" , { teacher: teacherData })
         
     },
     show(req, res) {
@@ -70,15 +70,24 @@ module.exports = {
         })
     },
     async update(req, res) {
-                
+        const teacher = true
+
         await Teacher.update(req.body.id, req.body)
 
-        return res.redirect(`/teachers/${req.body.id}`)
+        return res.render("parts/success" , { teacher })
 
     },
     async delete(req, res) {
-        await Teacher.delete(req.body.id)
-        return res.redirect('/teachers')
+        try {
+            await Teacher.delete(req.body.id)
+
+            const teacher = true
+
+            return res.render("parts/delete-success", { teacher })
+        } catch (err) {
+            console.error(err)
+            return res.render('parts/error')
+        }  
     }
 }
 
